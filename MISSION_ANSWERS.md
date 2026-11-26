@@ -143,6 +143,41 @@ Với yêu cầu **10 USD/user/tháng** của Exercise 4.4, có thể dùng Redi
 
 ## Part 5 — Scaling & Reliability
 
+### Exercise 5.1 — Liveness và readiness
+
+Trên bản develop, `GET /health` trả HTTP 200 với `status="ok"`, còn `GET /ready` trả HTTP 200 với `ready=true`. Liveness giúp nền tảng nhận biết tiến trình còn phản hồi. Readiness giúp bộ cân bằng tải quyết định có chuyển request mới tới instance hay không. Trong [app develop](05-scaling-reliability/develop/app.py), cờ readiness được bật sau bước khởi tạo. Khi cờ tắt, handler của `/ready` trả 503.
+
+### Exercise 5.2 — Graceful shutdown
+
+Chạy `python app.py` trong thư mục develop, gửi `POST /ask?question=Docker`, rồi gửi SIGTERM tới PID của agent sau 0,5 giây khi client vẫn đang chờ. Client nhận đủ câu trả lời với **HTTP 200 sau 3,04 giây** kể từ lúc gửi request. Log ghi `Shutdown complete`, tiếp theo là `Application shutdown complete` và tiến trình thoát với mã **0**. Nhờ thời gian chờ khi dừng, request đang xử lý vẫn trả kết quả cho client.
+
+Kết quả phụ thuộc cách khởi chạy. Trong lần thử riêng dùng `uvicorn app:app`, request cũng trả 200 nhưng tiến trình vẫn chạy sau 10 giây chờ SIGTERM. Kết quả thoát mã 0 ở trên thuộc lệnh `python app.py` trong hướng dẫn lab.
+
+### Exercise 5.3 — Lưu hội thoại trong Redis
+
+Mỗi instance có RAM riêng. Nếu câu hỏi thứ hai đến một instance khác, nó chỉ có thể tiếp tục hội thoại khi đọc được lịch sử của câu thứ nhất. Trong [app production](05-scaling-reliability/production/app.py), client gửi lại cùng `session_id`. Agent đọc và ghi khóa Redis `session:<session_id>`, giữ tối đa 20 tin nhắn và đặt lại TTL 3.600 giây khi ghi. Trong lần chạy dưới đây, `GET /health` xác nhận `storage="redis"` và `redis_connected=true`.
+
+### Exercise 5.4–5.5 — Chạy 3 instance và kiểm tra lịch sử
+
+Chạy trong `05-scaling-reliability/production/`:
+
+```bash
+touch .env.local
+docker compose -p k5-day14-scaling up -d --build --scale agent=3 --wait
+python test_stateless.py
+docker compose -p k5-day14-scaling down -v
+```
+
+Nginx nhận `POST /chat` qua cổng 8080 và chuyển tới các agent ở cổng nội bộ 8000. Với session `4a21548b-6fef-45d4-baaa-760566ed5f48`, trường `served_by` cho thấy cách phân phối thực tế:
+
+| Instance | Request đã xử lý |
+| --- | --- |
+| `instance-b441ec` | 1, 4 |
+| `instance-447781` | 2, 5 |
+| `instance-dcd121` | 3 |
+
+Sau 5 lượt, `GET /chat/{session_id}/history` trả đủ **10 tin nhắn**, gồm 5 câu hỏi và 5 câu trả lời xen kẽ theo đúng thứ tự. Cả 3 instance đã phục vụ cùng một session và đọc chung lịch sử từ Redis. Script giữ cả 3 instance hoạt động trong suốt phép thử.
+
 ## Part 6 — Checklist Deliverable
 
 <!-- Dán phần Checklist Deliverable từ lần chạy đầy đủ check_production_ready.py. -->
@@ -154,3 +189,4 @@ Với yêu cầu **10 USD/user/tháng** của Exercise 4.4, có thể dùng Redi
 | “làm cp1” | Codex đọc hai bản app, chạy thử bằng curl và soạn câu trả lời Exercise 1.1–1.3 từ mã nguồn và kết quả chạy. | Các lần chạy ghi ở Part 1 do Codex thực hiện. Chưa ghi nhận phần tự sửa hoặc kiểm tra lại của học viên. |
 | “hướng dẫn cp2” | Codex đọc Dockerfile và Compose, build hai image, đo kích thước, chạy curl và tổng hợp Exercise 2.1–2.4. | Số đo và phản hồi ở Part 2 do Codex thu trực tiếp trên máy lab. Học viên chưa ghi nhận lần tự kiểm tra. |
 | “hướng dẫn cp3” | Codex đọc code Part 4, chạy hai agent local, kiểm tra API key và JWT bằng curl, gửi 20 request rồi giải thích rate limiter và cost guard. | Các phản hồi HTTP trong Part 4 do Codex thu trực tiếp. Học viên chưa ghi nhận lần tự kiểm tra. |
+| “hướng dẫn hoàn thiện cp4” | Codex chạy thử các probe, gửi SIGTERM khi có request và chạy test_stateless.py trên 3 instance để soạn Part 5. | Các kết quả đo do Codex thu trực tiếp. Học viên chưa ghi nhận lần tự kiểm tra. |
