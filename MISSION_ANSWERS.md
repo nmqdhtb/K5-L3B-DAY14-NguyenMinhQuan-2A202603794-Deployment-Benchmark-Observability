@@ -42,6 +42,56 @@ Ví dụ đối chiếu trực tiếp: [develop/app.py, dòng 52](01-localhost-v
 
 ## Part 2 — Docker
 
+### Exercise 2.1 — Đọc Dockerfile develop
+
+1. **Base image** là `python:3.11`. Docker dùng filesystem và Python có sẵn của image này làm nền để cài thư viện và thêm mã agent.
+2. **Working directory** là `/app`. Vì vậy `COPY ... .` đặt file vào `/app` và `python app.py` chạy từ thư mục đó.
+3. **Thứ tự COPY** quyết định khi nào phải cài lại thư viện. Dockerfile chép `requirements.txt` rồi chạy `pip install` trước khi chép `app.py`. Khi chỉ sửa mã agent, Docker có thể dùng lại layer đã cài thư viện.
+4. **CMD và ENTRYPOINT**: `CMD ["python", "app.py"]` cung cấp lệnh mặc định. Ví dụ, `docker run --rm my-agent:develop python --version` thay toàn bộ lệnh mặc định. Nếu image có `ENTRYPOINT` dạng exec, đối số sau tên image sẽ được nối vào entrypoint, thay cho đối số mặc định trong `CMD`.
+
+### Exercise 2.2 — Chạy container develop
+
+Build từ gốc repo để Docker có thể chép cả `utils/mock_llm.py`. Sau khi chạy container, gửi câu hỏi qua query string:
+
+```console
+$ docker build -f 02-docker/develop/Dockerfile -t my-agent:develop .
+$ docker run --rm -d --name k5-day14-cp2-develop -p 127.0.0.1:8000:8000 my-agent:develop
+$ curl -fsS -w ' HTTP %{http_code}\n' -X POST 'http://127.0.0.1:8000/ask?question=Hello'
+{"answer":"Tôi là AI agent được deploy lên cloud. Câu hỏi của bạn đã được nhận."} HTTP 200
+```
+
+### Exercise 2.3 — Đo kích thước image
+
+Build bản production từ gốc repo bằng `docker build -f 02-docker/production/Dockerfile -t my-agent:advanced .`. Cả hai image được build cho kiến trúc `arm64`.
+
+| Image | Kết quả `docker images my-agent` | Kích thước theo byte từ `docker image inspect` |
+| --- | ---: | ---: |
+| `my-agent:develop` | 1.67 GB (≈ 1 672 MB) | 1 672 149 312 |
+| `my-agent:advanced` | 265 MB | 265 497 305 |
+
+**Bản production nhỏ hơn 84,12%** so với develop, tính theo byte bằng `(1 − 265497305 / 1672149312) × 100`.
+
+Stage `builder` cài `gcc`, `libpq-dev` và các thư viện Python. Stage `runtime` bắt đầu lại từ `python:3.11-slim`, chỉ chép các thư viện đã cài và mã cần để chạy agent. Kích thước giảm nhờ cả hai thay đổi so với develop: dùng base slim và để công cụ biên dịch ở lại builder.
+
+### Exercise 2.4 — Stack Compose và kiểm tra qua Nginx
+
+Trong `02-docker/production/`, tạo file trống bằng `touch .env.local` và chạy `docker compose -p k5-day14-docker up -d --build --wait`. Cả bốn service đã khởi động thành công.
+
+```text
+Client → Nginx :80 → agent:8000 (FastAPI, 2 Uvicorn worker)
+                       ├── REDIS_URL  → redis:6379  → volume redis_data
+                       └── QDRANT_URL → qdrant:6333 → volume qdrant_data
+```
+
+Các service phân giải tên qua mạng Compose `internal`. Compose đợi Redis và Qdrant đạt trạng thái healthy trước khi khởi động agent. Hai nhánh dưới là địa chỉ dịch vụ được cấu hình cho agent. Trong bài này, handler `/ask` gọi mock LLM trực tiếp. Client truy cập agent qua Nginx trên cổng 80.
+
+```console
+$ curl -fsS -w ' HTTP %{http_code}\n' http://127.0.0.1/health
+{"status":"ok","uptime_seconds":19.1,"version":"2.0.0","timestamp":"2026-11-26T08:12:17.725858"} HTTP 200
+$ curl -fsS -w ' HTTP %{http_code}\n' -H 'Content-Type: application/json' -d '{"question":"Explain microservices"}' http://127.0.0.1/ask
+{"answer":"Agent đang hoạt động tốt! (mock response) Hỏi thêm câu hỏi đi nhé."} HTTP 200
+```
+
 ## Part 3 — Cloud Deployment
 
 ## Part 4 — API Security
@@ -57,3 +107,4 @@ Ví dụ đối chiếu trực tiếp: [develop/app.py, dòng 52](01-localhost-v
 | Câu hỏi đã gửi AI | Gợi ý nhận được | Phần tự sửa và cách tự kiểm tra |
 | --- | --- | --- |
 | “làm cp1” | Codex đọc hai bản app, chạy thử bằng curl và soạn câu trả lời Exercise 1.1–1.3 từ mã nguồn và kết quả chạy. | Các lần chạy ghi ở Part 1 do Codex thực hiện. Chưa ghi nhận phần tự sửa hoặc kiểm tra lại của học viên. |
+| “hướng dẫn cp2” | Codex đọc Dockerfile và Compose, build hai image, đo kích thước, chạy curl và tổng hợp Exercise 2.1–2.4. | Số đo và phản hồi ở Part 2 do Codex thu trực tiếp trên máy lab. Học viên chưa ghi nhận lần tự kiểm tra. |
