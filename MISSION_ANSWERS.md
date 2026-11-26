@@ -180,7 +180,26 @@ Sau 5 lượt, `GET /chat/{session_id}/history` trả đủ **10 tin nhắn**, g
 
 ## Part 6 — Checklist Deliverable
 
-<!-- Dán phần Checklist Deliverable từ lần chạy đầy đủ check_production_ready.py. -->
+Chạy trong `06-lab-complete/` bằng `.venv/bin/python check_production_ready.py` với Docker. Checker đo image **297 MB**, xác nhận rate limit vẫn có hiệu lực sau khi restart agent và ghi nhận `docker stop` hoàn tất trong **1,5 giây**, exit code **0**.
+
+```text
+  📋 Checklist Deliverable
+     ✅ Dockerfile (multi-stage, < 500 MB)
+     ✅ docker-compose.yml (agent + redis)
+     ✅ .dockerignore
+     ✅ Health check endpoint (GET /health)
+     ✅ Readiness endpoint (GET /ready)
+     ✅ API Key authentication
+     ✅ Rate limiting
+     ✅ Cost guard
+     ✅ Config từ environment variables
+     ✅ Structured logging
+     ✅ Graceful shutdown
+     ✅ Public URL ready (Railway / Render config)
+----------------------------------------------------------------
+  Result: 12/12 tiêu chí đạt · 41/41 checks passed
+  🎉 PASS 12/12 — PRODUCTION READY! Deploy nào!
+```
 
 ## AI log
 
@@ -190,3 +209,4 @@ Sau 5 lượt, `GET /chat/{session_id}/history` trả đủ **10 tin nhắn**, g
 | “hướng dẫn cp2” | Codex đọc Dockerfile và Compose, build hai image, đo kích thước, chạy curl và tổng hợp Exercise 2.1–2.4. | Số đo và phản hồi ở Part 2 do Codex thu trực tiếp trên máy lab. Học viên chưa ghi nhận lần tự kiểm tra. |
 | “hướng dẫn cp3” | Codex đọc code Part 4, chạy hai agent local, kiểm tra API key và JWT bằng curl, gửi 20 request rồi giải thích rate limiter và cost guard. | Các phản hồi HTTP trong Part 4 do Codex thu trực tiếp. Học viên chưa ghi nhận lần tự kiểm tra. |
 | “hướng dẫn hoàn thiện cp4” | Codex chạy thử các probe, gửi SIGTERM khi có request và chạy test_stateless.py trên 3 instance để soạn Part 5. | Các kết quả đo do Codex thu trực tiếp. Học viên chưa ghi nhận lần tự kiểm tra. |
+| “hướng dẫn tôi làm cp5” | Codex triển khai agent Part 6, cấu hình Docker và Railway, dùng Redis để giới hạn request và dự trù chi phí đồng thời. | Codex chạy checker đầy đủ với Docker. |
