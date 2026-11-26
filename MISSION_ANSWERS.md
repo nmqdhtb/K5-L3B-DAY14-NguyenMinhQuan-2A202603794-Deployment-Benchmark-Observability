@@ -228,3 +228,4 @@ Chạy trong `06-lab-complete/` bằng `.venv/bin/python check_production_ready.
 | “hướng dẫn hoàn thiện cp4” | Codex chạy thử các probe, gửi SIGTERM khi có request và chạy test_stateless.py trên 3 instance để soạn Part 5. | Các kết quả đo do Codex thu trực tiếp. Học viên chưa ghi nhận lần tự kiểm tra. |
 | “hướng dẫn tôi làm cp5” | Codex triển khai agent Part 6, cấu hình Docker và Railway, dùng Redis để giới hạn request và dự trù chi phí đồng thời. | Codex chạy checker đầy đủ với Docker. |
 | “hướng dẫn các bước trong cp6” | Codex so sánh cấu hình, đọc pipeline Cloud Run, triển khai agent và Redis qua Railway CLI rồi lưu ba ảnh minh chứng. |  |
+| “hướng dẫn hoàn thiện cp7” | Codex bổ sung histogram, chạy load test và eval, sửa hai mục trong knowledge base và tổng hợp số đo vào báo cáo. | Codex đã khởi động lại v2 và đối chiếu 23 kết quả với baseline. |
