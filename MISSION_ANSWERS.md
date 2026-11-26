@@ -218,6 +218,8 @@ Chạy trong `06-lab-complete/` bằng `.venv/bin/python check_production_ready.
   🎉 PASS 12/12 — PRODUCTION READY! Deploy nào!
 ```
 
+Lần kiểm tra CP8 có thêm URL Railway công khai đạt **12/12 tiêu chí, 42/42 phép kiểm tra**, bao gồm Docker.
+
 ## AI log
 
 | Câu hỏi đã gửi AI | Gợi ý nhận được | Phần tự sửa và cách tự kiểm tra |
@@ -229,3 +231,4 @@ Chạy trong `06-lab-complete/` bằng `.venv/bin/python check_production_ready.
 | “hướng dẫn tôi làm cp5” | Codex triển khai agent Part 6, cấu hình Docker và Railway, dùng Redis để giới hạn request và dự trù chi phí đồng thời. | Codex chạy checker đầy đủ với Docker. |
 | “hướng dẫn các bước trong cp6” | Codex so sánh cấu hình, đọc pipeline Cloud Run, triển khai agent và Redis qua Railway CLI rồi lưu ba ảnh minh chứng. |  |
 | “hướng dẫn hoàn thiện cp7” | Codex bổ sung histogram, chạy load test và eval, sửa hai mục trong knowledge base và tổng hợp số đo vào báo cáo. | Codex đã khởi động lại v2 và đối chiếu 23 kết quả với baseline. |
+| “hướng dẫn cp8” | Codex chạy stack Docker, đối chiếu trace với log, đo thời gian cảnh báo và so sánh benchmark 1 với 3 replica. | Codex đối chiếu kết quả với số liệu gốc và tập hợp minh chứng tại máy để học viên rà soát. |

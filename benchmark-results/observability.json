@@ -1,0 +1,1439 @@
+{
+  "baseline": {
+    "time": 1795686862.209837,
+    "metrics": {
+      "rps": [
+        {
+          "metric": {
+            "instance": "172.25.0.3:8000"
+          },
+          "value": [
+            1795686862.253,
+            "8.436210250722715"
+          ]
+        },
+        {
+          "metric": {
+            "instance": "172.25.0.8:8000"
+          },
+          "value": [
+            1795686862.253,
+            "8.12889850697412"
+          ]
+        }
+      ],
+      "p95": [
+        {
+          "metric": {},
+          "value": [
+            1795686862.31,
+            "1.5213108636566357"
+          ]
+        }
+      ],
+      "avg": [
+        {
+          "metric": {},
+          "value": [
+            1795686862.314,
+            "0.34510142087335544"
+          ]
+        }
+      ],
+      "tokens": [
+        {
+          "metric": {
+            "type": "input"
+          },
+          "value": [
+            1795686862.318,
+            "1216.891013038999"
+          ]
+        },
+        {
+          "metric": {
+            "type": "output"
+          },
+          "value": [
+            1795686862.318,
+            "644.9123860847546"
+          ]
+        }
+      ],
+      "error": [
+        {
+          "metric": {},
+          "value": [
+            1795686862.324,
+            "0.00768304121191346"
+          ]
+        }
+      ],
+      "cost": [
+        {
+          "metric": {},
+          "value": [
+            1795686862.328,
+            "3.392022071312843"
+          ]
+        }
+      ],
+      "up": [
+        {
+          "metric": {
+            "__name__": "up",
+            "instance": "172.25.0.3:8000",
+            "job": "agent"
+          },
+          "value": [
+            1795686862.331,
+            "1"
+          ]
+        },
+        {
+          "metric": {
+            "__name__": "up",
+            "instance": "172.25.0.8:8000",
+            "job": "agent"
+          },
+          "value": [
+            1795686862.331,
+            "1"
+          ]
+        }
+      ],
+      "version": [
+        {
+          "metric": {
+            "__name__": "agent_info",
+            "instance": "172.25.0.3:8000",
+            "job": "agent",
+            "model": "mock-llm-small",
+            "version": "v2"
+          },
+          "value": [
+            1795686862.333,
+            "1"
+          ]
+        },
+        {
+          "metric": {
+            "__name__": "agent_info",
+            "instance": "172.25.0.8:8000",
+            "job": "agent",
+            "model": "mock-llm-small",
+            "version": "v2"
+          },
+          "value": [
+            1795686862.333,
+            "1"
+          ]
+        }
+      ]
+    },
+    "alerts": {
+      "LLMCostBurnRateHigh": "firing",
+      "AgentHighLatencyP95": "pending"
+    }
+  },
+  "chaos": {
+    "time": 1795687108.1329238,
+    "metrics": {
+      "rps": [
+        {
+          "metric": {
+            "instance": "172.25.0.3:8000"
+          },
+          "value": [
+            1795687108.136,
+            "7.818466126040946"
+          ]
+        },
+        {
+          "metric": {
+            "instance": "172.25.0.8:8000"
+          },
+          "value": [
+            1795687108.136,
+            "7.691188770500746"
+          ]
+        }
+      ],
+      "p95": [
+        {
+          "metric": {},
+          "value": [
+            1795687108.142,
+            "1.8877631578947367"
+          ]
+        }
+      ],
+      "avg": [
+        {
+          "metric": {},
+          "value": [
+            1795687108.146,
+            "0.5522953642274329"
+          ]
+        }
+      ],
+      "tokens": [
+        {
+          "metric": {
+            "type": "input"
+          },
+          "value": [
+            1795687108.15,
+            "910.8513036837703"
+          ]
+        },
+        {
+          "metric": {
+            "type": "output"
+          },
+          "value": [
+            1795687108.15,
+            "484.4176151860068"
+          ]
+        }
+      ],
+      "error": [
+        {
+          "metric": {},
+          "value": [
+            1795687108.155,
+            "0.205158264947245"
+          ]
+        }
+      ],
+      "cost": [
+        {
+          "metric": {},
+          "value": [
+            1795687108.159,
+            "1.6944347073985968"
+          ]
+        }
+      ],
+      "up": [
+        {
+          "metric": {
+            "__name__": "up",
+            "instance": "172.25.0.3:8000",
+            "job": "agent"
+          },
+          "value": [
+            1795687108.163,
+            "1"
+          ]
+        },
+        {
+          "metric": {
+            "__name__": "up",
+            "instance": "172.25.0.8:8000",
+            "job": "agent"
+          },
+          "value": [
+            1795687108.163,
+            "1"
+          ]
+        }
+      ],
+      "version": [
+        {
+          "metric": {
+            "__name__": "agent_info",
+            "instance": "172.25.0.3:8000",
+            "job": "agent",
+            "model": "mock-llm-small",
+            "version": "v2"
+          },
+          "value": [
+            1795687108.166,
+            "1"
+          ]
+        },
+        {
+          "metric": {
+            "__name__": "agent_info",
+            "instance": "172.25.0.8:8000",
+            "job": "agent",
+            "model": "mock-llm-small",
+            "version": "v2"
+          },
+          "value": [
+            1795687108.166,
+            "1"
+          ]
+        }
+      ]
+    },
+    "alerts": {
+      "AgentHighErrorRate": "firing",
+      "AgentHighLatencyP95": "firing"
+    }
+  },
+  "chaos_times": {
+    "start": 1795686958.300968,
+    "elapsed": {
+      "AgentHighErrorRate": 95.5,
+      "AgentHighLatencyP95": 149.8
+    }
+  },
+  "pre_pause": {
+    "time": 1795687188.732878,
+    "metrics": {
+      "rps": [
+        {
+          "metric": {
+            "instance": "172.25.0.3:8000"
+          },
+          "value": [
+            1795687188.88,
+            "6.363752068219423"
+          ]
+        },
+        {
+          "metric": {
+            "instance": "172.25.0.8:8000"
+          },
+          "value": [
+            1795687188.88,
+            "6.811703252786415"
+          ]
+        }
+      ],
+      "p95": [
+        {
+          "metric": {},
+          "value": [
+            1795687188.888,
+            "1.6495098039215685"
+          ]
+        }
+      ],
+      "avg": [
+        {
+          "metric": {},
+          "value": [
+            1795687188.894,
+            "0.3076125243398593"
+          ]
+        }
+      ],
+      "tokens": [
+        {
+          "metric": {
+            "type": "input"
+          },
+          "value": [
+            1795687188.9,
+            "913.6529755086458"
+          ]
+        },
+        {
+          "metric": {
+            "type": "output"
+          },
+          "value": [
+            1795687188.9,
+            "486.08156511936585"
+          ]
+        }
+      ],
+      "error": [
+        {
+          "metric": {},
+          "value": [
+            1795687188.903,
+            "0.06431539178124587"
+          ]
+        }
+      ],
+      "cost": [
+        {
+          "metric": {},
+          "value": [
+            1795687188.907,
+            "1.5731214653536134"
+          ]
+        }
+      ],
+      "up": [
+        {
+          "metric": {
+            "__name__": "up",
+            "instance": "172.25.0.3:8000",
+            "job": "agent"
+          },
+          "value": [
+            1795687188.911,
+            "1"
+          ]
+        },
+        {
+          "metric": {
+            "__name__": "up",
+            "instance": "172.25.0.8:8000",
+            "job": "agent"
+          },
+          "value": [
+            1795687188.911,
+            "1"
+          ]
+        }
+      ],
+      "version": [
+        {
+          "metric": {
+            "__name__": "agent_info",
+            "instance": "172.25.0.3:8000",
+            "job": "agent",
+            "model": "mock-llm-small",
+            "version": "v2"
+          },
+          "value": [
+            1795687188.913,
+            "1"
+          ]
+        },
+        {
+          "metric": {
+            "__name__": "agent_info",
+            "instance": "172.25.0.8:8000",
+            "job": "agent",
+            "model": "mock-llm-small",
+            "version": "v2"
+          },
+          "value": [
+            1795687188.913,
+            "1"
+          ]
+        }
+      ]
+    },
+    "alerts": {
+      "AgentHighErrorRate": "firing",
+      "AgentHighLatencyP95": "firing"
+    }
+  },
+  "paused": {
+    "time": 1795687227.6198988,
+    "metrics": {
+      "rps": [
+        {
+          "metric": {
+            "instance": "172.25.0.3:8000"
+          },
+          "value": [
+            1795687227.619,
+            "3.2931944444444445"
+          ]
+        },
+        {
+          "metric": {
+            "instance": "172.25.0.8:8000"
+          },
+          "value": [
+            1795687227.619,
+            "10.508553295148792"
+          ]
+        }
+      ],
+      "p95": [
+        {
+          "metric": {},
+          "value": [
+            1795687227.624,
+            "0.2974548077133852"
+          ]
+        }
+      ],
+      "avg": [
+        {
+          "metric": {},
+          "value": [
+            1795687227.628,
+            "0.25210670269209595"
+          ]
+        }
+      ],
+      "tokens": [
+        {
+          "metric": {
+            "type": "input"
+          },
+          "value": [
+            1795687227.632,
+            "1014.0113886860239"
+          ]
+        },
+        {
+          "metric": {
+            "type": "output"
+          },
+          "value": [
+            1795687227.632,
+            "539.338932036872"
+          ]
+        }
+      ],
+      "error": [
+        {
+          "metric": {},
+          "value": [
+            1795687227.635,
+            "0.010775518593910485"
+          ]
+        }
+      ],
+      "cost": [
+        {
+          "metric": {},
+          "value": [
+            1795687227.64,
+            "1.4949706865272696"
+          ]
+        }
+      ],
+      "up": [
+        {
+          "metric": {
+            "__name__": "up",
+            "instance": "172.25.0.3:8000",
+            "job": "agent"
+          },
+          "value": [
+            1795687227.644,
+            "0"
+          ]
+        },
+        {
+          "metric": {
+            "__name__": "up",
+            "instance": "172.25.0.8:8000",
+            "job": "agent"
+          },
+          "value": [
+            1795687227.644,
+            "1"
+          ]
+        }
+      ],
+      "version": [
+        {
+          "metric": {
+            "__name__": "agent_info",
+            "instance": "172.25.0.8:8000",
+            "job": "agent",
+            "model": "mock-llm-small",
+            "version": "v2"
+          },
+          "value": [
+            1795687227.647,
+            "1"
+          ]
+        }
+      ]
+    },
+    "alerts": {
+      "AgentInstanceDown": "firing"
+    }
+  },
+  "pause_time": {
+    "elapsed": 38.3,
+    "state": "firing"
+  },
+  "v1": {
+    "time": 1795687307.091609,
+    "metrics": {
+      "rps": [
+        {
+          "metric": {
+            "instance": "172.25.0.3:8000"
+          },
+          "value": [
+            1795687307.098,
+            "9.163969598894504"
+          ]
+        },
+        {
+          "metric": {
+            "instance": "172.25.0.8:8000"
+          },
+          "value": [
+            1795687307.098,
+            "9.290233437568176"
+          ]
+        }
+      ],
+      "p95": [
+        {
+          "metric": {},
+          "value": [
+            1795687307.105,
+            "0.2729995810976107"
+          ]
+        }
+      ],
+      "avg": [
+        {
+          "metric": {},
+          "value": [
+            1795687307.114,
+            "0.21936250093327514"
+          ]
+        }
+      ],
+      "tokens": [
+        {
+          "metric": {
+            "type": "input"
+          },
+          "value": [
+            1795687307.117,
+            "665.6422831980119"
+          ]
+        },
+        {
+          "metric": {
+            "type": "output"
+          },
+          "value": [
+            1795687307.117,
+            "360.64791987239585"
+          ]
+        }
+      ],
+      "error": [
+        {
+          "metric": {},
+          "value": [
+            1795687307.12,
+            "0.01280772537610347"
+          ]
+        }
+      ],
+      "cost": [
+        {
+          "metric": {},
+          "value": [
+            1795687307.123,
+            "1.3534243682483675"
+          ]
+        }
+      ],
+      "up": [
+        {
+          "metric": {
+            "__name__": "up",
+            "instance": "172.25.0.3:8000",
+            "job": "agent"
+          },
+          "value": [
+            1795687307.128,
+            "1"
+          ]
+        },
+        {
+          "metric": {
+            "__name__": "up",
+            "instance": "172.25.0.8:8000",
+            "job": "agent"
+          },
+          "value": [
+            1795687307.128,
+            "1"
+          ]
+        }
+      ],
+      "version": [
+        {
+          "metric": {
+            "__name__": "agent_info",
+            "instance": "172.25.0.8:8000",
+            "job": "agent",
+            "model": "mock-llm-small",
+            "version": "v1"
+          },
+          "value": [
+            1795687307.131,
+            "1"
+          ]
+        },
+        {
+          "metric": {
+            "__name__": "agent_info",
+            "instance": "172.25.0.3:8000",
+            "job": "agent",
+            "model": "mock-llm-small",
+            "version": "v1"
+          },
+          "value": [
+            1795687307.131,
+            "1"
+          ]
+        }
+      ]
+    },
+    "alerts": {}
+  },
+  "large": {
+    "time": 1795687449.262916,
+    "metrics": {
+      "rps": [
+        {
+          "metric": {
+            "instance": "172.25.0.3:8000"
+          },
+          "value": [
+            1795687449.263,
+            "7.8139196801744495"
+          ]
+        },
+        {
+          "metric": {
+            "instance": "172.25.0.8:8000"
+          },
+          "value": [
+            1795687449.263,
+            "7.595580753016427"
+          ]
+        }
+      ],
+      "p95": [
+        {
+          "metric": {},
+          "value": [
+            1795687449.268,
+            "0.735000032304998"
+          ]
+        }
+      ],
+      "avg": [
+        {
+          "metric": {},
+          "value": [
+            1795687449.273,
+            "0.5024059006799765"
+          ]
+        }
+      ],
+      "tokens": [
+        {
+          "metric": {
+            "type": "input"
+          },
+          "value": [
+            1795687449.276,
+            "1136.886557827013"
+          ]
+        },
+        {
+          "metric": {
+            "type": "output"
+          },
+          "value": [
+            1795687449.276,
+            "603.8051704845236"
+          ]
+        }
+      ],
+      "error": [
+        {
+          "metric": {},
+          "value": [
+            1795687449.279,
+            "0.008254779144693278"
+          ]
+        }
+      ],
+      "cost": [
+        {
+          "metric": {},
+          "value": [
+            1795687449.283,
+            "15.206001362138684"
+          ]
+        }
+      ],
+      "up": [
+        {
+          "metric": {
+            "__name__": "up",
+            "instance": "172.25.0.3:8000",
+            "job": "agent"
+          },
+          "value": [
+            1795687449.285,
+            "1"
+          ]
+        },
+        {
+          "metric": {
+            "__name__": "up",
+            "instance": "172.25.0.8:8000",
+            "job": "agent"
+          },
+          "value": [
+            1795687449.285,
+            "1"
+          ]
+        }
+      ],
+      "version": [
+        {
+          "metric": {
+            "__name__": "agent_info",
+            "instance": "172.25.0.8:8000",
+            "job": "agent",
+            "model": "mock-llm-large",
+            "version": "v2"
+          },
+          "value": [
+            1795687449.289,
+            "1"
+          ]
+        },
+        {
+          "metric": {
+            "__name__": "agent_info",
+            "instance": "172.25.0.3:8000",
+            "job": "agent",
+            "model": "mock-llm-large",
+            "version": "v2"
+          },
+          "value": [
+            1795687449.289,
+            "1"
+          ]
+        }
+      ]
+    },
+    "alerts": {
+      "LLMCostBurnRateHigh": "firing"
+    }
+  },
+  "cost_time": {
+    "before": {},
+    "first_firing": 142.1
+  },
+  "eval_v1": {
+    "passed": 1,
+    "total": 23,
+    "accuracy": 0.0435,
+    "errors": 0,
+    "agent_version": "v1"
+  },
+  "trace_slow": {
+    "log": {
+      "ts": "2026-11-26T09:57:59.059404+00:00",
+      "level": "INFO",
+      "service": "observable-agent",
+      "instance": "ebf8e4e9e9f0",
+      "event": "http_request",
+      "trace_id": "a0d6475ff868dd049bdb32330a90a562",
+      "span_id": "3b23ea4a0ec3325e",
+      "request_id": "2a8a7c8f2f47",
+      "method": "POST",
+      "route": "/ask",
+      "status": 200,
+      "ms": 1964.1
+    },
+    "trace": {
+      "result": {
+        "resourceSpans": [
+          {
+            "resource": {
+              "attributes": [
+                {
+                  "key": "agent.version",
+                  "value": {
+                    "stringValue": "v2"
+                  }
+                },
+                {
+                  "key": "deployment.environment.name",
+                  "value": {
+                    "stringValue": "lab"
+                  }
+                },
+                {
+                  "key": "service.instance.id",
+                  "value": {
+                    "stringValue": "ebf8e4e9e9f0"
+                  }
+                },
+                {
+                  "key": "service.name",
+                  "value": {
+                    "stringValue": "observable-agent"
+                  }
+                },
+                {
+                  "key": "service.version",
+                  "value": {
+                    "stringValue": "1.0.0"
+                  }
+                },
+                {
+                  "key": "telemetry.sdk.language",
+                  "value": {
+                    "stringValue": "python"
+                  }
+                },
+                {
+                  "key": "telemetry.sdk.name",
+                  "value": {
+                    "stringValue": "opentelemetry"
+                  }
+                },
+                {
+                  "key": "telemetry.sdk.version",
+                  "value": {
+                    "stringValue": "1.45.2"
+                  }
+                }
+              ]
+            },
+            "scopeSpans": [
+              {
+                "scope": {
+                  "name": "agent"
+                },
+                "spans": [
+                  {
+                    "traceId": "a0d6475ff868dd049bdb32330a90a562",
+                    "spanId": "f9e68bc23fcbcdac",
+                    "parentSpanId": "db9e96e4d5ee0a49",
+                    "flags": 256,
+                    "name": "agent.retrieve_context",
+                    "kind": 1,
+                    "startTimeUnixNano": "1795687077288289044",
+                    "endTimeUnixNano": "1795687077371225836",
+                    "attributes": [
+                      {
+                        "key": "retrieval.documents",
+                        "value": {
+                          "intValue": "1"
+                        }
+                      }
+                    ],
+                    "status": {}
+                  },
+                  {
+                    "traceId": "a0d6475ff868dd049bdb32330a90a562",
+                    "spanId": "054d4e9c74df3262",
+                    "parentSpanId": "db9e96e4d5ee0a49",
+                    "flags": 256,
+                    "name": "chat mock-llm-small",
+                    "kind": 1,
+                    "startTimeUnixNano": "1795687077371407920",
+                    "endTimeUnixNano": "1795687079057723170",
+                    "attributes": [
+                      {
+                        "key": "gen_ai.operation.name",
+                        "value": {
+                          "stringValue": "chat"
+                        }
+                      },
+                      {
+                        "key": "gen_ai.provider.name",
+                        "value": {
+                          "stringValue": "mock"
+                        }
+                      },
+                      {
+                        "key": "gen_ai.request.model",
+                        "value": {
+                          "stringValue": "mock-llm-small"
+                        }
+                      },
+                      {
+                        "key": "gen_ai.usage.input_tokens",
+                        "value": {
+                          "intValue": "76"
+                        }
+                      },
+                      {
+                        "key": "gen_ai.usage.output_tokens",
+                        "value": {
+                          "intValue": "39"
+                        }
+                      },
+                      {
+                        "key": "llm.cost_usd",
+                        "value": {
+                          "doubleValue": 3.48e-05
+                        }
+                      }
+                    ],
+                    "status": {}
+                  },
+                  {
+                    "traceId": "a0d6475ff868dd049bdb32330a90a562",
+                    "spanId": "db9e96e4d5ee0a49",
+                    "parentSpanId": "3b23ea4a0ec3325e",
+                    "flags": 256,
+                    "name": "agent.run",
+                    "kind": 1,
+                    "startTimeUnixNano": "1795687077288264253",
+                    "endTimeUnixNano": "1795687079057891837",
+                    "attributes": [
+                      {
+                        "key": "agent.question.length",
+                        "value": {
+                          "intValue": "44"
+                        }
+                      },
+                      {
+                        "key": "agent.version",
+                        "value": {
+                          "stringValue": "v2"
+                        }
+                      }
+                    ],
+                    "status": {}
+                  }
+                ]
+              },
+              {
+                "scope": {
+                  "name": "opentelemetry.instrumentation.fastapi",
+                  "version": "0.66b2"
+                },
+                "spans": [
+                  {
+                    "traceId": "a0d6475ff868dd049bdb32330a90a562",
+                    "spanId": "3b23ea4a0ec3325e",
+                    "flags": 256,
+                    "name": "POST /ask",
+                    "kind": 2,
+                    "startTimeUnixNano": "1795687077095090628",
+                    "endTimeUnixNano": "1795687079060427879",
+                    "attributes": [
+                      {
+                        "key": "http.flavor",
+                        "value": {
+                          "stringValue": "1.1"
+                        }
+                      },
+                      {
+                        "key": "http.host",
+                        "value": {
+                          "stringValue": "172.25.0.8:8000"
+                        }
+                      },
+                      {
+                        "key": "http.method",
+                        "value": {
+                          "stringValue": "POST"
+                        }
+                      },
+                      {
+                        "key": "http.route",
+                        "value": {
+                          "stringValue": "/ask"
+                        }
+                      },
+                      {
+                        "key": "http.scheme",
+                        "value": {
+                          "stringValue": "http"
+                        }
+                      },
+                      {
+                        "key": "http.server_name",
+                        "value": {
+                          "stringValue": "nginx"
+                        }
+                      },
+                      {
+                        "key": "http.status_code",
+                        "value": {
+                          "intValue": "200"
+                        }
+                      },
+                      {
+                        "key": "http.target",
+                        "value": {
+                          "stringValue": "/ask"
+                        }
+                      },
+                      {
+                        "key": "http.url",
+                        "value": {
+                          "stringValue": "http://nginx/ask"
+                        }
+                      },
+                      {
+                        "key": "http.user_agent",
+                        "value": {
+                          "stringValue": "python-requests/2.34.2"
+                        }
+                      },
+                      {
+                        "key": "net.host.port",
+                        "value": {
+                          "intValue": "8000"
+                        }
+                      },
+                      {
+                        "key": "net.peer.ip",
+                        "value": {
+                          "stringValue": "172.25.0.5"
+                        }
+                      },
+                      {
+                        "key": "net.peer.port",
+                        "value": {
+                          "intValue": "39274"
+                        }
+                      }
+                    ],
+                    "status": {}
+                  }
+                ],
+                "schemaUrl": "https://opentelemetry.io/schemas/1.11.0"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "trace_error": {
+    "log": {
+      "ts": "2026-11-26T09:57:20.069468+00:00",
+      "level": "INFO",
+      "service": "observable-agent",
+      "instance": "456c50df2b50",
+      "event": "llm_error",
+      "trace_id": "2ae2fc7bee6c85fcdab9268ed31a7582",
+      "span_id": "079667999ff6f271",
+      "request_id": "6011ed747b43",
+      "error": "Upstream LLM error: 503 Service Unavailable (mock)"
+    },
+    "trace": {
+      "result": {
+        "resourceSpans": [
+          {
+            "resource": {
+              "attributes": [
+                {
+                  "key": "agent.version",
+                  "value": {
+                    "stringValue": "v2"
+                  }
+                },
+                {
+                  "key": "deployment.environment.name",
+                  "value": {
+                    "stringValue": "lab"
+                  }
+                },
+                {
+                  "key": "service.instance.id",
+                  "value": {
+                    "stringValue": "456c50df2b50"
+                  }
+                },
+                {
+                  "key": "service.name",
+                  "value": {
+                    "stringValue": "observable-agent"
+                  }
+                },
+                {
+                  "key": "service.version",
+                  "value": {
+                    "stringValue": "1.0.0"
+                  }
+                },
+                {
+                  "key": "telemetry.sdk.language",
+                  "value": {
+                    "stringValue": "python"
+                  }
+                },
+                {
+                  "key": "telemetry.sdk.name",
+                  "value": {
+                    "stringValue": "opentelemetry"
+                  }
+                },
+                {
+                  "key": "telemetry.sdk.version",
+                  "value": {
+                    "stringValue": "1.45.2"
+                  }
+                }
+              ]
+            },
+            "scopeSpans": [
+              {
+                "scope": {
+                  "name": "agent"
+                },
+                "spans": [
+                  {
+                    "traceId": "2ae2fc7bee6c85fcdab9268ed31a7582",
+                    "spanId": "649a882479220c5d",
+                    "parentSpanId": "f12fec89b63d53d7",
+                    "flags": 256,
+                    "name": "agent.retrieve_context",
+                    "kind": 1,
+                    "startTimeUnixNano": "1795687039203658180",
+                    "endTimeUnixNano": "1795687039219426930",
+                    "attributes": [
+                      {
+                        "key": "retrieval.documents",
+                        "value": {
+                          "intValue": "1"
+                        }
+                      }
+                    ],
+                    "status": {}
+                  },
+                  {
+                    "traceId": "2ae2fc7bee6c85fcdab9268ed31a7582",
+                    "spanId": "be64a8d510b7e598",
+                    "parentSpanId": "f12fec89b63d53d7",
+                    "flags": 256,
+                    "name": "chat mock-llm-small",
+                    "kind": 1,
+                    "startTimeUnixNano": "1795687039219609847",
+                    "endTimeUnixNano": "1795687040068873930",
+                    "attributes": [
+                      {
+                        "key": "error.type",
+                        "value": {
+                          "stringValue": "upstream_unavailable"
+                        }
+                      },
+                      {
+                        "key": "gen_ai.operation.name",
+                        "value": {
+                          "stringValue": "chat"
+                        }
+                      },
+                      {
+                        "key": "gen_ai.provider.name",
+                        "value": {
+                          "stringValue": "mock"
+                        }
+                      },
+                      {
+                        "key": "gen_ai.request.model",
+                        "value": {
+                          "stringValue": "mock-llm-small"
+                        }
+                      }
+                    ],
+                    "events": [
+                      {
+                        "timeUnixNano": "1795687040068775222",
+                        "name": "exception",
+                        "attributes": [
+                          {
+                            "key": "exception.escaped",
+                            "value": {
+                              "stringValue": "False"
+                            }
+                          },
+                          {
+                            "key": "exception.message",
+                            "value": {
+                              "stringValue": "Upstream LLM error: 503 Service Unavailable (mock)"
+                            }
+                          },
+                          {
+                            "key": "exception.stacktrace",
+                            "value": {
+                              "stringValue": "Traceback (most recent call last):\n  File \"/app/app/main.py\", line 153, in run_agent\n    result = await mock_llm.generate(question, context=context,\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/app/utils/mock_llm.py\", line 199, in generate\n    raise LLMError(\"Upstream LLM error: 503 Service Unavailable (mock)\")\nutils.mock_llm.LLMError: Upstream LLM error: 503 Service Unavailable (mock)\n"
+                            }
+                          },
+                          {
+                            "key": "exception.type",
+                            "value": {
+                              "stringValue": "utils.mock_llm.LLMError"
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "status": {
+                      "message": "LLMError: Upstream LLM error: 503 Service Unavailable (mock)",
+                      "code": 2
+                    }
+                  },
+                  {
+                    "traceId": "2ae2fc7bee6c85fcdab9268ed31a7582",
+                    "spanId": "f12fec89b63d53d7",
+                    "parentSpanId": "079667999ff6f271",
+                    "flags": 256,
+                    "name": "agent.run",
+                    "kind": 1,
+                    "startTimeUnixNano": "1795687039203600805",
+                    "endTimeUnixNano": "1795687040069401430",
+                    "attributes": [
+                      {
+                        "key": "agent.question.length",
+                        "value": {
+                          "intValue": "38"
+                        }
+                      },
+                      {
+                        "key": "agent.version",
+                        "value": {
+                          "stringValue": "v2"
+                        }
+                      }
+                    ],
+                    "events": [
+                      {
+                        "timeUnixNano": "1795687040069389555",
+                        "name": "exception",
+                        "attributes": [
+                          {
+                            "key": "exception.escaped",
+                            "value": {
+                              "stringValue": "False"
+                            }
+                          },
+                          {
+                            "key": "exception.message",
+                            "value": {
+                              "stringValue": "Upstream LLM error: 503 Service Unavailable (mock)"
+                            }
+                          },
+                          {
+                            "key": "exception.stacktrace",
+                            "value": {
+                              "stringValue": "Traceback (most recent call last):\n  File \"/app/.local/lib/python3.11/site-packages/opentelemetry/trace/__init__.py\", line 602, in use_span\n    yield span\n  File \"/app/.local/lib/python3.11/site-packages/opentelemetry/sdk/trace/__init__.py\", line 1136, in start_as_current_span\n    yield span\n  File \"/app/.local/lib/python3.11/site-packages/opentelemetry/trace/__init__.py\", line 441, in start_as_current_span\n    yield span\n  File \"/app/app/main.py\", line 153, in run_agent\n    result = await mock_llm.generate(question, context=context,\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/app/utils/mock_llm.py\", line 199, in generate\n    raise LLMError(\"Upstream LLM error: 503 Service Unavailable (mock)\")\nutils.mock_llm.LLMError: Upstream LLM error: 503 Service Unavailable (mock)\n"
+                            }
+                          },
+                          {
+                            "key": "exception.type",
+                            "value": {
+                              "stringValue": "utils.mock_llm.LLMError"
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "status": {
+                      "message": "LLMError: Upstream LLM error: 503 Service Unavailable (mock)",
+                      "code": 2
+                    }
+                  }
+                ]
+              },
+              {
+                "scope": {
+                  "name": "opentelemetry.instrumentation.fastapi",
+                  "version": "0.66b2"
+                },
+                "spans": [
+                  {
+                    "traceId": "2ae2fc7bee6c85fcdab9268ed31a7582",
+                    "spanId": "079667999ff6f271",
+                    "flags": 256,
+                    "name": "POST /ask",
+                    "kind": 2,
+                    "startTimeUnixNano": "1795687039201889763",
+                    "endTimeUnixNano": "1795687040070483722",
+                    "attributes": [
+                      {
+                        "key": "http.flavor",
+                        "value": {
+                          "stringValue": "1.1"
+                        }
+                      },
+                      {
+                        "key": "http.host",
+                        "value": {
+                          "stringValue": "172.25.0.3:8000"
+                        }
+                      },
+                      {
+                        "key": "http.method",
+                        "value": {
+                          "stringValue": "POST"
+                        }
+                      },
+                      {
+                        "key": "http.route",
+                        "value": {
+                          "stringValue": "/ask"
+                        }
+                      },
+                      {
+                        "key": "http.scheme",
+                        "value": {
+                          "stringValue": "http"
+                        }
+                      },
+                      {
+                        "key": "http.server_name",
+                        "value": {
+                          "stringValue": "nginx"
+                        }
+                      },
+                      {
+                        "key": "http.status_code",
+                        "value": {
+                          "intValue": "503"
+                        }
+                      },
+                      {
+                        "key": "http.target",
+                        "value": {
+                          "stringValue": "/ask"
+                        }
+                      },
+                      {
+                        "key": "http.url",
+                        "value": {
+                          "stringValue": "http://nginx/ask"
+                        }
+                      },
+                      {
+                        "key": "http.user_agent",
+                        "value": {
+                          "stringValue": "python-requests/2.34.2"
+                        }
+                      },
+                      {
+                        "key": "net.host.port",
+                        "value": {
+                          "intValue": "8000"
+                        }
+                      },
+                      {
+                        "key": "net.peer.ip",
+                        "value": {
+                          "stringValue": "172.25.0.5"
+                        }
+                      },
+                      {
+                        "key": "net.peer.port",
+                        "value": {
+                          "intValue": "42152"
+                        }
+                      }
+                    ],
+                    "status": {
+                      "code": 2
+                    }
+                  }
+                ],
+                "schemaUrl": "https://opentelemetry.io/schemas/1.11.0"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

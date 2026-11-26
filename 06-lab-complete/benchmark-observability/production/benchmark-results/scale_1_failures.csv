@@ -1,0 +1,3 @@
+Method,Name,Error,Occurrences,First Seen,Last Seen
+POST,/ask,HTTPError('504 Server Error: Gateway Time-out for url: /ask'),320,2026-11-26T09:48:38Z,2026-11-26T09:50:01Z
+POST,/ask,HTTPError('503 Server Error: Service Unavailable for url: /ask'),26,2026-11-26T09:48:17Z,2026-11-26T09:49:34Z
