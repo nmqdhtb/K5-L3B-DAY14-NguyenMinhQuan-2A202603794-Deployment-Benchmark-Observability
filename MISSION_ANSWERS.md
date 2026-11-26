@@ -94,6 +94,23 @@ $ curl -fsS -w ' HTTP %{http_code}\n' -H 'Content-Type: application/json' -d '{"
 
 ## Part 3 — Cloud Deployment
 
+### Exercise 3.1–3.2 — Railway và Render
+
+Nền tảng đã chọn cho agent Part 6 là Railway. Trạng thái triển khai và các lệnh kiểm tra nằm trong [DEPLOYMENT.md](DEPLOYMENT.md). Agent đang phục vụ tại [https://agent-production-40ee2863.up.railway.app](https://agent-production-40ee2863.up.railway.app). Bốn phép thử public ngày 26/11/2026 cho kết quả 200, 200, 401 và 200 theo thứ tự trong báo cáo.
+
+| Thành phần | [Railway của Part 6](06-lab-complete/railway.toml) | [Render Blueprint mẫu của Part 3](03-cloud-deployment/render/render.yaml) |
+| --- | --- | --- |
+| Build và khởi động | `builder = "DOCKERFILE"` dùng Dockerfile trong `06-lab-complete/`. Lệnh khởi động nằm trong image. | Blueprint chọn runtime Python và khai báo riêng lệnh cài thư viện, lệnh chạy Uvicorn. |
+| Phạm vi cấu hình | TOML này cấu hình service agent. Redis là service riêng trong project, agent cần tham chiếu URL kết nối của Redis. | Danh sách `services` mô tả cả web và Redis. Web vẫn cần biến kết nối tới Redis. |
+| Health check và secret | `healthcheckPath = "/health"`; key của agent được cấp qua biến môi trường của service. | `healthCheckPath: /health`; Blueprint có thể yêu cầu nhập secret bằng `sync: false` hoặc sinh giá trị bằng `generateValue: true`. |
+
+### Exercise 3.3 — Pipeline Cloud Run
+
+1. [Cloud Build](03-cloud-deployment/production-cloud-run/cloudbuild.yaml) cài thư viện và chạy `pytest tests/` trong Python 3.11. Bước test kết thúc bằng `echo` và chưa bật `set -e`, nên lỗi pytest có thể bị che.
+2. Bước build tạo image với hai tag `$COMMIT_SHA` và `latest`. Bước push đẩy các tag lên `gcr.io/$PROJECT_ID/ai-agent`.
+3. Bước deploy dùng tag của commit để triển khai `ai-agent` lên Cloud Run tại `asia-southeast1`, đặt biến môi trường production và tham chiếu secret qua Secret Manager.
+4. [service.yaml](03-cloud-deployment/production-cloud-run/service.yaml) mô tả riêng cấu hình 1–10 instance, concurrency 80, startup probe `/ready` và liveness probe `/health`. Pipeline triển khai bằng các cờ của `gcloud run deploy`.
+
 ## Part 4 — API Security
 
 ### Exercise 4.1 — API key
@@ -210,3 +227,4 @@ Chạy trong `06-lab-complete/` bằng `.venv/bin/python check_production_ready.
 | “hướng dẫn cp3” | Codex đọc code Part 4, chạy hai agent local, kiểm tra API key và JWT bằng curl, gửi 20 request rồi giải thích rate limiter và cost guard. | Các phản hồi HTTP trong Part 4 do Codex thu trực tiếp. Học viên chưa ghi nhận lần tự kiểm tra. |
 | “hướng dẫn hoàn thiện cp4” | Codex chạy thử các probe, gửi SIGTERM khi có request và chạy test_stateless.py trên 3 instance để soạn Part 5. | Các kết quả đo do Codex thu trực tiếp. Học viên chưa ghi nhận lần tự kiểm tra. |
 | “hướng dẫn tôi làm cp5” | Codex triển khai agent Part 6, cấu hình Docker và Railway, dùng Redis để giới hạn request và dự trù chi phí đồng thời. | Codex chạy checker đầy đủ với Docker. |
+| “hướng dẫn các bước trong cp6” | Codex so sánh cấu hình, đọc pipeline Cloud Run, triển khai agent và Redis qua Railway CLI rồi lưu ba ảnh minh chứng. |  |
