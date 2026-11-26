@@ -96,6 +96,51 @@ $ curl -fsS -w ' HTTP %{http_code}\n' -H 'Content-Type: application/json' -d '{"
 
 ## Part 4 — API Security
 
+### Exercise 4.1 — API key
+
+Trong [app.py của bản develop](04-api-gateway/develop/app.py), route `POST /ask` khai báo `Depends(verify_api_key)`. FastAPI đọc header `X-API-Key` và kiểm tra trước khi gọi mock LLM. Gửi cùng body `{"question":"Hello"}` ba lần, chỉ thay đổi header, thu được các trích đoạn `curl -i` dưới đây theo thứ tự thiếu key, sai key và đúng key.
+
+```http
+HTTP/1.1 401 Unauthorized
+
+{"detail":"Missing API key. Include header: X-API-Key: <your-key>"}
+
+HTTP/1.1 403 Forbidden
+
+{"detail":"Invalid API key."}
+
+HTTP/1.1 200 OK
+
+{"question":"Hello","answer":"Tôi là AI agent được deploy lên cloud. Câu hỏi của bạn đã được nhận."}
+```
+
+Để xoay key, cấp key mới cho client qua kênh riêng, cập nhật biến môi trường `AGENT_API_KEY` và phối hợp thời điểm client chuyển key với lần khởi động lại agent. App đọc biến khi nạp module và mỗi tiến trình chỉ chấp nhận một key.
+
+### Exercise 4.2 — JWT
+
+Trên bản production, đăng nhập bằng tài khoản lab `student` tại `POST /auth/token` trả `HTTP/1.1 200 OK` và thời hạn 60 phút. Client gửi access token qua header `Authorization: Bearer <token đã che>`. Server kiểm tra chữ ký HS256 và thời hạn trước khi đọc username và role. Khi dùng token này cho `POST /ask`, request đầu tiên trả HTTP 200 và trường `requests_remaining` bằng 9. [Mã xác thực](04-api-gateway/production/auth.py)
+
+### Exercise 4.3 — Rate limiting
+
+Gửi liên tiếp 20 request `POST /ask` bằng cùng JWT của `student`, với câu hỏi từ `Test 1` đến `Test 20`. Request **1–10 trả 200**, request **11–20 trả 429**. Trích phản hồi `curl -i` của request thứ 11:
+
+```http
+HTTP/1.1 429 Too Many Requests
+x-ratelimit-limit: 10
+x-ratelimit-remaining: 0
+retry-after: 59
+
+{"detail":{"error":"Rate limit exceeded","limit":10,"window_seconds":60,"retry_after_seconds":59}}
+```
+
+[Rate limiter](04-api-gateway/production/rate_limiter.py) giữ thời điểm từng request trong một hàng đợi theo username. Mỗi lần kiểm tra, nó bỏ các mốc cũ hơn 60 giây rồi đếm số còn lại. Hạn mức là 10 request cho user và 100 cho admin trong cùng cửa sổ trượt. Server chọn hạn mức theo role trong JWT đã xác thực. Ở lần đo trên, header `Retry-After` yêu cầu client chờ 59 giây.
+
+### Exercise 4.4 — Cost guard
+
+Trong [cost_guard.py](04-api-gateway/production/cost_guard.py), agent kiểm tra chi phí đã tích lũy trước mỗi lần gọi LLM. Khi người dùng đã tiêu ít nhất 80% ngân sách ngày, guard ghi cảnh báo. Khi đã tiêu đủ 1 USD, request kế tiếp bị chặn với HTTP 402. Nếu tổng chi phí đã đạt ngưỡng 10 USD của dịch vụ, guard trả 503. Sau mỗi câu trả lời, agent ước tính số token đầu vào và đầu ra rồi cộng chi phí theo đơn giá riêng. Bản mẫu giữ các bộ đếm trong RAM.
+
+Với yêu cầu **10 USD/user/tháng** của Exercise 4.4, có thể dùng Redis với khóa theo username và tháng UTC. Trước khi gọi LLM, kiểm tra chi phí đã dùng cộng phần dự trù của request trong cùng một thao tác nguyên tử. Nếu vượt 10 USD thì trả 402, nếu còn đủ thì giữ chỗ phần dự trù. Sau khi có kết quả, đối soát với chi phí thực tế. Khi sang tháng mới, dùng khóa mới và cho khóa cũ hết hạn. Cần cả hai cơ chế vì một vài câu trả lời dài vẫn có thể tiêu hết ngân sách dù số request mỗi phút còn thấp.
+
 ## Part 5 — Scaling & Reliability
 
 ## Part 6 — Checklist Deliverable
@@ -108,3 +153,4 @@ $ curl -fsS -w ' HTTP %{http_code}\n' -H 'Content-Type: application/json' -d '{"
 | --- | --- | --- |
 | “làm cp1” | Codex đọc hai bản app, chạy thử bằng curl và soạn câu trả lời Exercise 1.1–1.3 từ mã nguồn và kết quả chạy. | Các lần chạy ghi ở Part 1 do Codex thực hiện. Chưa ghi nhận phần tự sửa hoặc kiểm tra lại của học viên. |
 | “hướng dẫn cp2” | Codex đọc Dockerfile và Compose, build hai image, đo kích thước, chạy curl và tổng hợp Exercise 2.1–2.4. | Số đo và phản hồi ở Part 2 do Codex thu trực tiếp trên máy lab. Học viên chưa ghi nhận lần tự kiểm tra. |
+| “hướng dẫn cp3” | Codex đọc code Part 4, chạy hai agent local, kiểm tra API key và JWT bằng curl, gửi 20 request rồi giải thích rate limiter và cost guard. | Các phản hồi HTTP trong Part 4 do Codex thu trực tiếp. Học viên chưa ghi nhận lần tự kiểm tra. |
