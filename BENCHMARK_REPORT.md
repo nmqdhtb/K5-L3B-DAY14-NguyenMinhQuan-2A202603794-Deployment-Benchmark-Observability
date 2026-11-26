@@ -132,6 +132,8 @@ Hai lượt Locust headless dùng cùng kịch bản, 100 user, ramp 10 user/gi�
 | [1](benchmark-results/scale_1_stats.csv) | 2689 | 24.10 | 570 | 10000 | 14000 | 346 | 12.87% |
 | [3](benchmark-results/scale_3_stats.csv) | 6814 | 57.18 | 200 | 1700 | 3800 | 65 | 0.95% |
 
+Riêng `POST /ask`, lượt 1 replica có 346 lỗi trên 2446 request (14.15%), còn lượt 3 replica có 65 lỗi trên 6229 request (1.04%). Cả hai lượt đều vượt mục tiêu p95 500 ms. Chỉ lượt 3 replica đạt mục tiêu tỷ lệ lỗi ≤ 2%. Khi so sánh với CP7, cần lưu ý Locust tính độ trễ cả phản hồi lỗi, còn load test CP7 tính độ trễ trên phản hồi HTTP 200.
+
 Qua Nginx, throughput tăng **2.37 lần** và p95 giảm **83.0%**. Ở lượt 1 replica, CSV lỗi ghi 320 lần HTTP 504 và 26 lần HTTP 503. Với 3 replica, 65 lỗi đều là HTTP 503. Kết quả phù hợp với việc các replica chia sẻ tải và giảm thời gian xếp hàng. Độ trễ của từng lời gọi mock LLM vẫn góp vào phần đuôi của phân phối. Trong lượt 1 replica, máy cũng mở giao diện truy vết. Đây là một lượt cho mỗi cấu hình trên máy dùng chung, không đủ để quy toàn bộ chênh lệch cho số replica.
 
 Để lặp lại, dùng cùng project Compose `k5-day14-observability`, đặt `--scale agent=1` rồi `--scale agent=3`. Chờ health check và Docker DNS cập nhật trước mỗi lượt. Khi gọi `docker compose run`, thêm `--no-deps` để Locust không khởi tạo lại agent theo số replica mặc định của Compose. Đã kiểm tra số container agent trước và sau mỗi lượt. [Chi tiết lỗi khi chạy 1 replica](benchmark-results/scale_1_failures.csv) · [Chi tiết lỗi khi chạy 3 replica](benchmark-results/scale_3_failures.csv)
